@@ -6,14 +6,12 @@ on:
   pull_request:
     branches: [main,feature/**]
 
-permissions: write-all
-
 env:
   Branches: main,feature/**
   MainBranch: main
   NPMRegistry: https://registry.npmjs.org/
   InstallCommand: npm ci
-  DeployCommand: npm publish --access public
+  DeployCommand: npm run deploy
   Organization: fathym-arcade
   Repository: arcade
   Output: ./public
@@ -100,7 +98,7 @@ jobs:
 
       # build & publish npm packages to npmjs.org
       - name: npm build & publish
-        if: ${{ !!env.DeployCommand && steps.package_json_exists.outputs.files_exists == 'true' }}
+        if: false
         run: ${{ env.DeployCommand }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
