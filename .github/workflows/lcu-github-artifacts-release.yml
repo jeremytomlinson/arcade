@@ -1,21 +1,21 @@
-name: fathym-arcade/arcade
+name: GitHub Artifacts - Release
 
 on:
   push:
-    branches: [main]
+    branches: [main,feature/arcadev2]
   pull_request:
-    branches: [main]
+    branches: [main,feature/arcadev2]
 
 permissions: write-all
 
 env:
   CI: false
-  Branches: main
+  Branches: main,feature/arcadev2
   MainBranch: main
   NPMRegistry: https://registry.npmjs.org/
-  InstallCommand: npm i
+  InstallCommand: npm ci
   BuildCommand: npm run build
-  Output: ./public
+  Output: ./
 
 jobs:
   build:
