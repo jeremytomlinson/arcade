@@ -15,7 +15,7 @@ env:
   NPMRegistry: https://registry.npmjs.org/
   InstallCommand: npm i
   BuildCommand: npm run build
-  Output: ./
+  Output: ./public
 
 jobs:
   build:
@@ -34,7 +34,6 @@ jobs:
         id: vars
         run: |
           branch=${GITHUB_REF##*/}
-
           echo ::set-output name=branchName::$branch
            
           if [ "$branch" == "${{ env.MainBranch }}" ]
@@ -43,12 +42,10 @@ jobs:
           else
               echo "::set-output name=versionBump::patch"
           fi
-
       - run: |
           echo "Set Variable Checks ${{ github.ref }}"
           echo "Current branch is ${{ steps.vars.outputs.branchName }}"
           echo "Version bump type is ${{ steps.vars.outputs.versionBump }}"
-
       # Check package.json exists
       - name: Check package.json existence
         id: package_json_exists
